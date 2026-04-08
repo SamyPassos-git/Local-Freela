@@ -102,7 +102,7 @@ Arquitetura baseada no padrão Cliente-Servidor (MVC).
 
 ---
 
-##📌 Status
+## 📌 Status
 
 🚧 Em desenvolvimento — foco atual no FrontEnd e estrutura inicial
 
