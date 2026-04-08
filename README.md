@@ -1,131 +1,115 @@
 # 🚀 Local Freela
 
-Plataforma web de intermediação de serviços onde pessoas oferecem e contratam habilidades de forma simples, rápida e direta.
+Plataforma web de intermediação de serviços onde usuários podem oferecer e contratar habilidades de forma simples, rápida e eficiente.
 
 ---
 
 ## 📌 Sobre o Projeto
 
-O **Local Freela** conecta dois tipos de usuários:
+O Local Freela é um projeto acadêmico desenvolvido com o objetivo de simular um ambiente real de prestação de serviços, conectando:
 
-* **Prestadores** → anunciam serviços
-* **Solicitantes** → buscam e contratam serviços
+* Prestadores → anunciam suas habilidades
+* Solicitantes → buscam e contratam serviços
 
-A plataforma permite cadastro, criação de habilidades, envio de solicitações e avaliação ao final de cada serviço, criando um sistema de reputação confiável.
+A plataforma inclui sistema de avaliações, notificações e um modelo de reputação baseado em interações entre usuários.
 
 ---
 
-## ⚙️ Funcionalidades Principais
-
-* Cadastro e autenticação de usuários
-* Criação e gerenciamento de habilidades
-* Busca dinâmica de serviços (sem recarregar página)
-* Envio e gerenciamento de solicitações
-* Sistema de avaliações (1 a 5 estrelas)
-* Notificações internas (in-app)
-* Ranking semanal de usuários
+## ⚙️ Funcionalidades
+Cadastro e autenticação de usuários
+Criação e gerenciamento de habilidades
+Busca dinâmica de serviços
+Envio e gerenciamento de solicitações
+Sistema de avaliações (1 a 5 estrelas)
+Notificações internas
+Ranking semanal de usuários
 
 ---
 
 ## 🪙 Diferencial: Sistema de Tokens
 
-O grande diferencial do projeto é o **sistema de tokens**, que funciona como moeda interna da plataforma.
+O principal diferencial do projeto é o sistema de tokens, que funciona como uma moeda interna.
 
-### Como funciona:
+✔️ Uso dos Tokens:
+* Enviar solicitações de serviço
+* Interagir dentro da plataforma
 
-* Usuários **gastam tokens** para:
+✔️ Ganho de Tokens:
+* Conclusão de serviços
+* Boas avaliações
+* Participação ativa no sistema
 
-  * Enviar solicitações de serviço
-  * Interagir dentro da plataforma
-
-* Usuários **ganham tokens** ao:
-
-  * Concluir serviços
-  * Receber boas avaliações
-  * Completar ações relevantes no sistema
-
-👉 Isso evita spam, incentiva qualidade e cria um ambiente mais competitivo.
-
-Todas as transações são registradas em histórico individual, garantindo controle total do saldo.
+👉 Esse sistema:
+* Evita spam
+* Incentiva qualidade
+* Cria engajamento e competição
 
 ---
 
-## 🏆 Sistema de Ranking
+## 🏆 Ranking Semanal
 
-A plataforma possui um **ranking semanal público**, baseado na movimentação de tokens:
+A plataforma conta com um sistema de ranking baseado em tokens:
 
-* Top prestadores da semana
-* Top contratantes da semana
+* Usuários mais ativos da semana
+* Destaque para melhores prestadores e solicitantes
 
-Isso aumenta o engajamento e destaca os usuários mais ativos.
+Isso aumenta a competitividade e a participação dentro da plataforma.
 
 ---
 
-## 🧠 Arquitetura
+## 🧠 Tecnologias Utilizadas
+* Frontend: JavaScript (Fetch API / AJAX)
+* Backend: Python + Django REST Framework
+* Banco de Dados: SQLite
 
-* **Frontend:** JavaScript (Fetch API / AJAX)
-* **Backend:** Python + Django REST Framework
-* **Banco de Dados:** SQLite
-
-Arquitetura baseada em modelo **Cliente-Servidor (MVC)**.
+Arquitetura baseada no padrão Cliente-Servidor (MVC).
 
 ---
 
 ## 📱 Características do Sistema
-
-* Plataforma 100% web
-* Interface responsiva
+* Plataforma web responsiva
+* Interface dinâmica (sem recarregamento de página)
 * Sistema modular
-* Busca dinâmica em tempo real
-* Notificações internas (sem dependência externa)
+* Notificações internas (in-app)
 
 ---
 
-## 🔄 Fluxo Básico
-
-1. Usuário se cadastra
-2. Cria ou busca uma habilidade
-3. Envia solicitação (consome tokens)
-4. Prestador aceita ou rejeita
-5. Serviço é realizado
-6. Avaliação é registrada
-7. Tokens são distribuídos automaticamente
+🔄 Fluxo do Sistema
+* Usuário se cadastra
+* Cria ou busca uma habilidade
+* Envia solicitação (consome tokens)
+* Prestador aceita ou rejeita
+* Serviço é realizado
+* Avaliação é feita
+* Tokens são distribuídos automaticamente
 
 ---
 
 ## 🎓 Contexto Acadêmico
 
-Projeto desenvolvido para a disciplina de **Desenvolvimento Web II**
+📚 Projeto Acadêmico desenvolvido para a disciplina de Desenvolvimento Web
 
-**Instrutor Acadêmico:**
-👨‍🏫 Otávio Lube
+---
+
+## 👨‍🏫 Instrutor: Otávio Lube
 
 ---
 
 ## 👨‍💻 Equipe
-
 * Samyla Silva Passos
 * Rhyan Fança Borsoneli Silva
 * Breno Porto Caparrosa
 
 ---
 
-## 📌 Status do Projeto
+##📌 Status
 
-🚧 Em desenvolvimento — foco atual no FrontEnd e estrutura base
+🚧 Em desenvolvimento — foco atual no FrontEnd e estrutura inicial
 
 ---
 
 ## 💡 Visão Futura
-
 * Aplicação mobile
-* Sistema de pagamentos reais
+* Integração com pagamentos reais
 * Melhorias no sistema de reputação
 * Expansão da gamificação
-
----
-
-## 🔥 Instrutor Acadêmico:
-Otávio Lube
-
-
