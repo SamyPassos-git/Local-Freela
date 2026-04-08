@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Local Freela – Plataforma de Troca de Habilidades</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#d8dde5;color:#1a1a2e;font-size:10.5pt;line-height:1.65;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.page{width:210mm;min-height:297mm;background:#fff;margin:8mm auto;padding:18mm 22mm 16mm;box-shadow:0 2px 18px rgba(0,0,0,0.15);position:relative;page-break-after:always;}
+.cover{padding:0;display:flex;flex-direction:column;min-height:297mm;}
+.cv-top{background:#0f3460;color:#fff;padding:16mm 22mm 10mm;text-align:center;}
+.cv-top .inst{font-size:11.5pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.cv-top .hr{width:50mm;height:2px;background:rgba(255,255,255,.3);margin:8px auto;}
+.cv-top .disc{font-size:10pt;opacity:.75;margin-bottom:3px;}
+.cv-top .prof{font-size:9.5pt;opacity:.6;}
+.cv-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12mm 22mm;}
+.cv-badge{background:#e94560;color:#fff;font-size:7.5pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:4px 16px;border-radius:20px;margin-bottom:8mm;}
+.cv-title{font-size:36pt;font-weight:800;color:#0f3460;text-align:center;line-height:1.1;margin-bottom:3mm;}
+.cv-brand{font-size:12pt;color:#e94560;font-weight:700;text-align:center;letter-spacing:1px;margin-bottom:4mm;}
+.cv-sub{font-size:10.5pt;color:#555;text-align:center;max-width:130mm;font-style:italic;margin-bottom:10mm;line-height:1.5;}
+.cv-line{width:70mm;height:3px;background:linear-gradient(90deg,#0f3460,#e94560);border-radius:3px;margin:0 auto 10mm;}
+.cv-team-lbl{font-size:8.5pt;text-transform:uppercase;letter-spacing:2px;color:#888;text-align:center;margin-bottom:5mm;}
+.cv-member{font-size:11.5pt;color:#1a1a2e;font-weight:600;text-align:center;margin:4px 0;}
+.cv-year{font-size:9.5pt;color:#aaa;text-align:center;margin-top:8mm;}
+.cv-bottom{background:#1a1a2e;color:rgba(255,255,255,.6);text-align:center;padding:7mm 22mm;font-size:8.5pt;letter-spacing:2.5px;text-transform:uppercase;}
+.accent{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0f3460,#e94560);}
+.pg-num{position:absolute;bottom:8mm;right:22mm;font-size:8pt;color:#ccc;}
+.pg-mark{position:absolute;bottom:8mm;left:22mm;font-size:7.5pt;color:#ddd;letter-spacing:.5px;}
+h1{font-size:17pt;color:#0f3460;font-weight:800;border-bottom:3px solid #e94560;padding-bottom:5px;margin-bottom:12px;}
+h2{font-size:12.5pt;color:#0f3460;font-weight:700;margin-top:18px;margin-bottom:8px;padding-left:9px;border-left:4px solid #0f3460;}
+h3{font-size:10.5pt;color:#16213e;font-weight:600;margin-top:12px;margin-bottom:5px;}
+p{margin-bottom:8px;text-align:justify;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:9.3pt;}
+thead th{background:#0f3460;color:#fff;padding:7px 10px;text-align:left;font-weight:600;font-size:8.8pt;letter-spacing:.3px;}
+tbody td{padding:6px 10px;border-bottom:1px solid #eaecef;vertical-align:top;}
+tbody tr:nth-child(even) td{background:#f7f9fc;}
+.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:8pt;font-weight:700;}
+.alta{background:#fee2e2;color:#991b1b;}.media{background:#fef9c3;color:#854d0e;}.baixa{background:#dcfce7;color:#166534;}
+.m{display:inline-block;padding:2px 8px;border-radius:3px;font-size:8pt;font-weight:700;font-family:'Courier New',monospace;}
+.GET{background:#d1fae5;color:#065f46;}.POST{background:#dbeafe;color:#1e40af;}.PUT{background:#fef3c7;color:#92400e;}.DELETE{background:#fee2e2;color:#991b1b;}.PATCH{background:#f3e8ff;color:#6b21a8;}
+code{font-family:'Courier New',monospace;font-size:8.5pt;background:#f1f3f5;padding:1px 5px;border-radius:3px;color:#1e293b;}
+.callout{background:#eff6ff;border-left:4px solid #3b82f6;padding:9px 13px;border-radius:0 6px 6px 0;margin:10px 0;font-size:9.5pt;color:#1e3a5f;}
+.callout.warn{background:#fffbeb;border-left-color:#f59e0b;color:#78350f;}
+.callout.ok{background:#f0fdf4;border-left-color:#22c55e;color:#14532d;}
+.callout.token{background:#fdf4ff;border-left:4px solid #a855f7;color:#581c87;}
+.dw{width:100%;margin:10px 0;text-align:center;border:1px solid #e5e7eb;border-radius:8px;padding:8px;background:#fafbfc;}
+.dcap{font-size:8.3pt;color:#777;font-style:italic;margin-top:4px;}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+.tc{border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 12px;text-align:center;background:#fafbfc;}
+.tc .lyr{font-size:7.5pt;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.tc .tnm{font-size:11pt;font-weight:700;color:#0f3460;}
+.tc .tdt{font-size:8.5pt;color:#666;margin-top:2px;}
+.ti{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #ddd;font-size:9.8pt;}
+.ti .n{color:#0f3460;font-weight:700;margin-right:8px;}.ti .pg{color:#aaa;}
+.ti.sub{padding-left:16px;font-size:9.3pt;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0;}
+.codeblock{background:#1e293b;color:#e2e8f0;font-family:'Courier New',monospace;font-size:7pt;padding:8px 11px;border-radius:6px;margin:5px 0;line-height:1.75;white-space:pre-wrap;word-break:break-all;overflow-wrap:break-word;max-width:100%;}
+.codeblock .kw{color:#93c5fd;}.codeblock .str{color:#86efac;}.codeblock .cm{color:#64748b;}.codeblock .tp{color:#fde68a;}.codeblock .fn{color:#f0abfc;}
+.sql-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0;}
+.sql-lbl{font-size:7.5pt;font-weight:700;color:#0f3460;margin-bottom:2px;}
+@media print{body{background:white;}.page{margin:0;box-shadow:none;page-break-after:always;}}
+</style>
+</head>
+<body>
+
+<!-- ===== CAPA ===== -->
+<div class="page cover">
+  <div class="cv-top">
+    <div class="inst">FAESA | Centro Universitário – Campus Vitória</div>
+    <div class="hr"></div>
+    <div class="disc">Desenvolvimento Web II</div>
+    <div class="prof">Prof. Otávio Lube</div>
+  </div>
+  <div class="cv-mid">
+    <div class="cv-badge">Documento Técnico de Requisitos</div>
+    <div class="cv-title">Local Freela</div>
+    <div class="cv-brand">Plataforma de Troca de Habilidades</div>
+    <div class="cv-sub">Especificação técnica completa de requisitos, arquitetura e modelagem do sistema</div>
+    <div class="cv-line"></div>
+    <div class="cv-team-lbl">Desenvolvedores</div>
+    <div class="cv-member">Samyla Silva Passos</div>
+    <div class="cv-member">Rhyan Fança Borsoneli Silva</div>
+    <div class="cv-member">Breno Porto Caparrosa</div>
+    <div class="cv-year">Análise e Desenvolvimento de Sistemas · 2026</div>
+  </div>
+  <div class="cv-bottom">Documento Técnico &nbsp;|&nbsp; ADS &nbsp;|&nbsp; 2026</div>
+</div>
+
+<!-- ===== SUMÁRIO ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>Sumário</h1>
+  <div class="ti"><span><span class="n">1.</span>Visão Geral do Projeto</span><span class="pg">3</span></div>
+  <div class="ti sub"><span>1.1 Definição do Minimundo</span><span class="pg">3</span></div>
+  <div class="ti"><span><span class="n">2.</span>Stack Tecnológica</span><span class="pg">3</span></div>
+  <div class="ti"><span><span class="n">3.</span>Requisitos Funcionais (RF)</span><span class="pg">4</span></div>
+  <div class="ti"><span><span class="n">4.</span>Sistema de Tokens</span><span class="pg">5</span></div>
+  <div class="ti"><span><span class="n">5.</span>Requisitos Não Funcionais (RNF)</span><span class="pg">6</span></div>
+  <div class="ti"><span><span class="n">6.</span>Diagrama UML – Casos de Uso</span><span class="pg">7</span></div>
+  <div class="ti"><span><span class="n">7.</span>Diagrama UML – Classes</span><span class="pg">8</span></div>
+  <div class="ti"><span><span class="n">8.</span>Modelo Entidade-Relacionamento (MER)</span><span class="pg">9</span></div>
+  <div class="ti"><span><span class="n">9.</span>DDL – Criação de Tabelas com SQL</span><span class="pg">10</span></div>
+  <div class="ti"><span><span class="n">10.</span>Endpoints REST</span><span class="pg">11</span></div>
+  <div class="ti"><span><span class="n">11.</span>Diagrama de Estados – Solicitação</span><span class="pg">12</span></div>
+  <div class="ti"><span><span class="n">12.</span>Projeto – Design</span><span class="pg">13</span></div>
+  <div class="pg-num">2</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== VISÃO GERAL + MINIMUNDO ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>1. Visão Geral do Projeto</h1>
+  <div class="callout">A <strong>Local Freela</strong> é uma plataforma web que conecta pessoas que oferecem serviços (prestadores) a pessoas que os buscam (solicitantes). Usuários criam perfis, anunciam suas habilidades e negociam a prestação de serviços de forma direta, com avaliação ao final. A plataforma é <strong>exclusivamente web</strong>, com possibilidade de expansão futura para aplicativo mobile.</div>
+
+  <h2>Exemplos de Habilidades Anunciadas</h2>
+  <table>
+    <thead><tr><th>Categoria</th><th>Exemplo de Anúncio</th></tr></thead>
+    <tbody>
+      <tr><td>Educação</td><td>"Dou aulas de Matemática – Ensino Médio e Vestibular"</td></tr>
+      <tr><td>Tecnologia</td><td>"Arrumo computadores e instalo sistemas operacionais"</td></tr>
+      <tr><td>Criação Digital</td><td>"Faço edição de vídeo para YouTube e redes sociais"</td></tr>
+      <tr><td>Idiomas</td><td>"Aulas de inglês e conversação – nível básico ao avançado"</td></tr>
+      <tr><td>Serviços Gerais</td><td>"Pequenos reparos domésticos e montagem de móveis"</td></tr>
+    </tbody>
+  </table>
+
+  <h2>1.1 Definição do Minimundo</h2>
+  <p>A <strong>Local Freela</strong> é uma plataforma web de intermediação de serviços que conecta pessoas que oferecem habilidades — denominadas <strong>prestadores</strong> — a pessoas que necessitam contratar um serviço — denominadas <strong>solicitantes</strong>. A plataforma opera exclusivamente via navegador web e é voltada ao público geral, independentemente de área de atuação ou formação acadêmica.</p>
+  <p>Qualquer pessoa pode se <strong>cadastrar</strong> na plataforma informando nome, e-mail, senha, uma breve biografia e foto de perfil. Após a autenticação, o usuário pode exercer ambos os papéis simultaneamente: atuar como <strong>prestador</strong>, ao anunciar suas habilidades e atender pedidos de serviço, e como <strong>solicitante</strong>, ao buscar serviços e enviar requisições a outros prestadores.</p>
+  <p>O prestador cria <strong>anúncios de habilidades</strong> informando título, descrição, categoria temática e preço fixo pelo serviço. Os anúncios são exibidos publicamente na plataforma e podem ser encontrados por meio de <strong>busca dinâmica</strong> por palavra-chave ou filtragem por categoria, sem necessidade de recarregar a página.</p>
+  <p>Ao encontrar um anúncio de interesse, o solicitante envia uma <strong>solicitação de serviço</strong> acompanhada de mensagem descritiva. Essa ação consome <strong>tokens</strong> do saldo do solicitante — moeda interna da plataforma —, desincentivando solicitações em massa e garantindo a qualidade dos contatos recebidos. O prestador é imediatamente notificado dentro da própria plataforma, sem envio de e-mail ou notificação externa, e pode <strong>aceitar</strong> ou <strong>rejeitar</strong> a solicitação. Solicitações não respondidas dentro do prazo são automaticamente marcadas como <strong>expiradas</strong> pelo sistema.</p>
+  <p>Com a solicitação aceita, o serviço entra em andamento. Ao ser concluído, qualquer uma das partes registra a conclusão. O solicitante, então, pode registrar uma <strong>avaliação</strong> com nota de 1 a 5 estrelas e comentário opcional, contribuindo para a formação da <strong>reputação pública</strong> do prestador.</p>
+  <p>Os <strong>tokens</strong> são a moeda interna da Local Freela: ganhos ao realizar ações positivas (concluir serviços, receber boas avaliações, completar perfil, indicar novos usuários) e gastos para interagir com a plataforma (enviar solicitações, enviar mensagens, destacar perfil). Toda movimentação é registrada no histórico individual. Semanalmente, a plataforma publica um <strong>ranking público</strong> dos prestadores e contratantes mais ativos, acessível sem login. A <strong>administração</strong> é responsável pelo gerenciamento de usuários e pelo cadastro das categorias de habilidades.</p>
+
+  <div class="pg-num">3</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== STACK + REQUISITOS FUNCIONAIS ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>2. Stack Tecnológica</h1>
+  <div class="tg" style="grid-template-columns:repeat(3,1fr);">
+    <div class="tc"><div class="lyr">Backend</div><div class="tnm">Python</div><div class="tdt">Django REST Framework</div></div>
+    <div class="tc"><div class="lyr">Frontend</div><div class="tnm">JavaScript</div><div class="tdt">Busca dinâmica com Fetch API / AJAX</div></div>
+    <div class="tc"><div class="lyr">Banco de Dados</div><div class="tnm">SQLite</div><div class="tdt">Relacional, leve, sem servidor externo</div></div>
+  </div>
+  <div class="callout warn" style="margin-top:10px;">
+    <strong>⚠ Itens opcionais – a definir:</strong> as camadas de <strong>Autenticação</strong>, <strong>Segurança</strong> e o padrão de <strong>API</strong> (ex.: JWT, bcrypt) ainda não foram definidas pela equipe. A adoção dessas tecnologias está condicionada à orientação do professor da disciplina e à capacidade técnica do grupo durante o desenvolvimento.
+  </div>
+
+  <h1 style="margin-top:22px">3. Requisitos Funcionais</h1>
+  <div class="callout">Os requisitos funcionais descrevem as funcionalidades que o sistema deve oferecer. Classificados por prioridade: <span class="tag alta">Alta</span> <span class="tag media">Média</span> <span class="tag baixa">Baixa</span></div>
+  <table>
+    <thead><tr><th style="width:52px">ID</th><th>Descrição</th><th style="width:90px">Prioridade</th></tr></thead>
+    <tbody>
+      <tr><td><code>RF01</code></td><td>O sistema deve permitir o cadastro de usuários com nome, e-mail, senha, biografia e foto de perfil.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF02</code></td><td>O sistema deve autenticar usuários mediante e-mail e senha, gerando token de sessão.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF03</code></td><td>O usuário autenticado deve poder editar suas informações de perfil (nome, bio, foto e senha).</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF04</code></td><td>O prestador deve poder anunciar habilidades informando título, descrição, categoria e preço fixo pelo serviço.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF05</code></td><td>O sistema deve permitir busca de habilidades por palavra-chave no título ou descrição, com resposta dinâmica (sem recarregar a página).</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF06</code></td><td>O sistema deve oferecer filtro de habilidades por categoria, possibilitando combinação com busca por texto.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF07</code></td><td>O solicitante deve poder enviar uma solicitação de serviço ao prestador, incluindo mensagem descritiva. A solicitação inicia com status <strong>Pendente</strong>.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF08</code></td><td>O prestador deve poder aceitar ou rejeitar uma solicitação recebida. A aceitação altera o status para <strong>Aceita</strong>; a rejeição encerra o fluxo.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF09</code></td><td>Após a prestação do serviço, o prestador ou o solicitante devem poder marcar a solicitação como <strong>Concluída</strong>.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF10</code></td><td>Após a conclusão, o solicitante deve poder avaliar o serviço com nota de 1 a 5 estrelas e comentário opcional. A média das notas compõe a reputação do prestador.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF11</code></td><td>A página de perfil do usuário deve exibir seus anúncios de habilidades, histórico de solicitações e índice de reputação calculado.</td><td><span class="tag media">Média</span></td></tr>
+      <tr><td><code>RF12</code></td><td>O sistema deve emitir uma <strong>notificação interna na plataforma</strong> para o prestador quando uma nova solicitação for recebida. A notificação deve ser exibida na interface e marcável como lida.<div class="callout ok" style="margin-top:5px;font-size:8.5pt;">✔ Tipo <strong>in-app</strong> — sem e-mail, push ou SMS. Ver RNF06.</div></td><td><span class="tag media">Média</span></td></tr>
+    </tbody>
+  </table>
+  <div class="pg-num">4</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== SISTEMA DE TOKENS ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>4. Sistema de Tokens</h1>
+  <div class="callout token"><strong>🪙 Observação da Equipe:</strong> A equipe optou por implementar um <strong>sistema proprietário de tokens</strong> como principal diferencial competitivo da <strong>Local Freela</strong> em relação a outras soluções similares no mercado. Os tokens criam uma economia interna que agrega valor, combate spam e incentiva comportamentos positivos.</div>
+  <h2>4.1 Créditos para Solicitação de Serviços</h2>
+  <div class="two-col">
+    <table>
+      <thead><tr><th colspan="2">🔴 Ações de Gasto</th></tr><tr><th>Ação</th><th style="width:90px">Custo</th></tr></thead>
+      <tbody>
+        <tr><td>Enviar solicitação de serviço</td><td>🪙 2 tokens</td></tr>
+        <tr><td>Enviar mensagem direta ao prestador</td><td>🪙 1 token</td></tr>
+        <tr><td>Destacar anúncio de habilidade</td><td>🪙 5 tokens</td></tr>
+        <tr><td>Destacar perfil no ranking</td><td>🪙 5 tokens</td></tr>
+        <tr><td>Subir posição no ranking</td><td>🪙 3 tokens</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead><tr><th colspan="2">🟢 Ações de Ganho</th></tr><tr><th>Atividade</th><th style="width:90px">Ganho</th></tr></thead>
+      <tbody>
+        <tr><td>Completar o cadastro do perfil</td><td>🪙 +3 tokens</td></tr>
+        <tr><td>Concluir um serviço com sucesso</td><td>🪙 +5 tokens</td></tr>
+        <tr><td>Receber avaliação positiva (≥ 4 estrelas)</td><td>🪙 +2 tokens</td></tr>
+        <tr><td>Indicar novo usuário que se cadastra</td><td>🪙 +4 tokens</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>4.2 Ranking da Plataforma</h2>
+  <table>
+    <thead><tr><th>Categoria do Ranking</th><th>Critério</th><th>Benefício</th></tr></thead>
+    <tbody>
+      <tr><td>🏆 Top Prestadores da Semana</td><td>Maior volume de tokens recebidos por avaliações e conclusões</td><td>Destaque na página inicial</td></tr>
+      <tr><td>🏢 Top Contratantes da Semana</td><td>Maior volume de tokens gastos em solicitações aceitas</td><td>Badge "Parceiro Local Freela"</td></tr>
+    </tbody>
+  </table>
+  <h2>4.3 Requisitos Funcionais – Tokens (RF13 a RF15)</h2>
+  <table>
+    <thead><tr><th style="width:52px">ID</th><th>Descrição</th><th style="width:90px">Prioridade</th></tr></thead>
+    <tbody>
+      <tr><td><code>RF13</code></td><td>O sistema deve manter saldo de tokens por usuário, debitando automaticamente o custo de cada ação e validando saldo suficiente antes de prosseguir.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF14</code></td><td>O sistema deve creditar tokens automaticamente ao usuário ao detectar atividades recompensáveis. Cada transação deve ser registrada com motivo, quantidade e data.</td><td><span class="tag alta">Alta</span></td></tr>
+      <tr><td><code>RF15</code></td><td>O sistema deve calcular e exibir ranking semanal público de prestadores e contratantes baseado na movimentação de tokens, acessível sem login.</td><td><span class="tag media">Média</span></td></tr>
+    </tbody>
+  </table>
+  <div class="pg-num">5</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== RNF ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>5. Requisitos Não Funcionais</h1>
+  <div class="callout">Os RNFs definem atributos de qualidade do sistema. O RNF06 especifica o comportamento do sistema de notificações, alinhado ao RF12.</div>
+  <table>
+    <thead><tr><th style="width:52px">ID</th><th style="width:110px">Categoria</th><th>Descrição</th></tr></thead>
+    <tbody>
+      <tr><td><code>RNF01</code></td><td>Segurança</td><td>A autenticação deve utilizar mecanismo seguro com expiração de sessão configurável, validado em todas as rotas protegidas.</td></tr>
+      <tr><td><code>RNF02</code></td><td>Segurança</td><td>Senhas dos usuários devem ser armazenadas exclusivamente como hash. Nenhuma senha em texto plano deve trafegar ou ser persistida.</td></tr>
+      <tr><td><code>RNF03</code></td><td>Desempenho</td><td>O tempo de resposta para operações de busca e filtro de habilidades deve ser inferior a <strong>2 segundos</strong> em condições normais de uso.</td></tr>
+      <tr><td><code>RNF04</code></td><td>Usabilidade</td><td>A interface deve ser <strong>responsiva</strong>, adaptando-se a dispositivos desktop e mobile, seguindo princípios de acessibilidade básica.</td></tr>
+      <tr><td><code>RNF05</code></td><td>Manutenibilidade</td><td>O código deve ser <strong>modular e documentado</strong>, seguindo boas práticas (clean code, separação de responsabilidades).</td></tr>
+      <tr><td><code>RNF06</code></td><td>Notificações</td><td>As notificações do RF12 devem ser exclusivamente do tipo <strong>in-app</strong>. O sistema não deve depender de serviços externos de e-mail, push ou SMS.</td></tr>
+      <tr><td><code>RNF07</code></td><td>Tokens</td><td>Todas as transações de tokens devem ser <strong>atômicas</strong> (SQLite com suporte a transações via <code>BEGIN</code>/<code>COMMIT</code>), garantindo consistência do saldo mesmo em falha parcial. Saldo nunca negativo.</td></tr>
+      <tr><td><code>RNF08</code></td><td>Compatibilidade</td><td>O sistema deve funcionar corretamente nos navegadores modernos: <strong>Chrome, Firefox, Edge e Safari</strong> (versões atuais e anterior).</td></tr>
+      <tr><td><code>RNF09</code></td><td>Arquitetura</td><td>O backend deve ser <strong>stateless</strong>, seguindo o estilo arquitetural cliente-servidor com padrão MVC, retornando respostas em JSON.</td></tr>
+    </tbody>
+  </table>
+  <h2 style="margin-top:16px">Relação RF12 × RNF06</h2>
+  <table>
+    <thead><tr><th>Aspecto</th><th>Definição</th></tr></thead>
+    <tbody>
+      <tr><td>Tipo de notificação</td><td>Interna à plataforma (in-app) — definida em RNF06</td></tr>
+      <tr><td>Gatilho</td><td>Criação de nova <code>Solicitacao</code> vinculada a uma <code>Habilidade</code> do prestador (RF07)</td></tr>
+      <tr><td>Destinatário</td><td>Usuário prestador dono da habilidade solicitada</td></tr>
+      <tr><td>Canal</td><td>Interface web — sem e-mail, push ou SMS</td></tr>
+      <tr><td>Estado</td><td>Não lida (padrão) / Lida (após interação do usuário)</td></tr>
+    </tbody>
+  </table>
+  <div class="pg-num">6</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== CASOS DE USO ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>6. Diagrama UML – Casos de Uso</h1>
+  <div class="callout">Interações entre os atores externos e os casos de uso do sistema. Legenda abaixo do diagrama.</div>
+  <div class="dw">
+    <svg viewBox="0 0 760 600" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <rect x="130" y="10" width="500" height="530" fill="#f8fafc" stroke="#0f3460" stroke-width="1.8" rx="4"/>
+      <text x="380" y="29" text-anchor="middle" font-size="9.8" font-weight="700" fill="#0f3460" letter-spacing="0.4">«sistema» Local Freela – Plataforma de Troca de Habilidades</text>
+      <circle cx="52" cy="243" r="13" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="52" y1="256" x2="52" y2="291" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="52" y1="266" x2="34" y2="280" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="52" y1="266" x2="70" y2="280" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="52" y1="291" x2="36" y2="313" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="52" y1="291" x2="68" y2="313" stroke="#1a1a2e" stroke-width="1.5"/>
+      <text x="52" y="330" text-anchor="middle" font-size="9.5" fill="#1a1a2e" font-weight="600">Solicitante</text>
+      <circle cx="712" cy="174" r="13" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="187" x2="712" y2="222" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="197" x2="694" y2="211" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="197" x2="730" y2="211" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="222" x2="696" y2="244" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="222" x2="728" y2="244" stroke="#1a1a2e" stroke-width="1.5"/>
+      <text x="712" y="261" text-anchor="middle" font-size="9.5" fill="#1a1a2e" font-weight="600">Prestador</text>
+      <circle cx="712" cy="435" r="13" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="448" x2="712" y2="483" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="458" x2="694" y2="472" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="458" x2="730" y2="472" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="483" x2="696" y2="505" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="712" y1="483" x2="728" y2="505" stroke="#1a1a2e" stroke-width="1.5"/>
+      <text x="712" y="522" text-anchor="middle" font-size="9.5" fill="#1a1a2e" font-weight="600">Administrador</text>
+      <ellipse cx="380" cy="68" rx="78" ry="17" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="380" y="72" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC01 – Cadastrar-se</text>
+      <ellipse cx="380" cy="118" rx="74" ry="17" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="380" y="122" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC02 – Fazer Login</text>
+      <ellipse cx="242" cy="200" rx="86" ry="17" fill="#dbeafe" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="242" y="204" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC03 – Buscar Habilidades</text>
+      <ellipse cx="242" cy="268" rx="86" ry="17" fill="#dbeafe" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="242" y="272" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC04 – Enviar Solicitação</text>
+      <ellipse cx="242" cy="336" rx="82" ry="17" fill="#dbeafe" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="242" y="340" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC05 – Avaliar Serviço</text>
+      <ellipse cx="543" cy="200" rx="90" ry="17" fill="#fce7f3" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="543" y="204" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC06 – Anunciar Habilidade</text>
+      <ellipse cx="543" cy="268" rx="90" ry="17" fill="#fce7f3" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="543" y="272" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC07 – Aceitar/Rejeitar Sol.</text>
+      <ellipse cx="543" cy="336" rx="90" ry="17" fill="#fce7f3" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="543" y="340" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC08 – Receber Notificação</text>
+      <ellipse cx="380" cy="404" rx="98" ry="17" fill="#f0fdf4" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="380" y="408" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC09 – Visualizar Perfil / Histórico</text>
+      <ellipse cx="380" cy="460" rx="88" ry="17" fill="#fef3c7" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="380" y="464" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC10 – Gerenciar Usuários</text>
+      <ellipse cx="380" cy="516" rx="92" ry="17" fill="#fef3c7" stroke="#0f3460" stroke-width="1.3"/>
+      <text x="380" y="520" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="600">UC11 – Gerenciar Categorias</text>
+      <line x1="65" y1="248" x2="302" y2="72" stroke="#475569" stroke-width="1"/>
+      <line x1="65" y1="254" x2="306" y2="119" stroke="#475569" stroke-width="1"/>
+      <line x1="65" y1="260" x2="156" y2="200" stroke="#475569" stroke-width="1"/>
+      <line x1="65" y1="268" x2="156" y2="268" stroke="#475569" stroke-width="1"/>
+      <line x1="65" y1="276" x2="160" y2="336" stroke="#475569" stroke-width="1"/>
+      <line x1="65" y1="283" x2="282" y2="404" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="179" x2="458" y2="72" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="185" x2="454" y2="119" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="200" x2="633" y2="200" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="208" x2="633" y2="268" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="216" x2="633" y2="336" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="226" x2="478" y2="404" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="451" x2="468" y2="460" stroke="#475569" stroke-width="1"/>
+      <line x1="699" y1="461" x2="472" y2="516" stroke="#475569" stroke-width="1"/>
+      <rect x="148" y="552" width="466" height="34" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="380" y="565" text-anchor="middle" font-size="8" font-weight="700" fill="#475569">LEGENDA</text>
+      <rect x="158" y="570" width="10" height="10" rx="2" fill="#dbeafe" stroke="#0f3460" stroke-width="1"/>
+      <text x="172" y="579" font-size="8" fill="#333">Solicitante</text>
+      <rect x="230" y="570" width="10" height="10" rx="2" fill="#fce7f3" stroke="#0f3460" stroke-width="1"/>
+      <text x="244" y="579" font-size="8" fill="#333">Prestador</text>
+      <rect x="306" y="570" width="10" height="10" rx="2" fill="#fef3c7" stroke="#0f3460" stroke-width="1"/>
+      <text x="320" y="579" font-size="8" fill="#333">Administrador</text>
+      <rect x="400" y="570" width="10" height="10" rx="2" fill="#e0f2fe" stroke="#0f3460" stroke-width="1"/>
+      <text x="414" y="579" font-size="8" fill="#333">Compartilhado (UC01/02)</text>
+      <rect x="556" y="570" width="10" height="10" rx="2" fill="#f0fdf4" stroke="#0f3460" stroke-width="1"/>
+      <text x="570" y="579" font-size="8" fill="#333">Ambos (Sol. + Prest.)</text>
+    </svg>
+    <div class="dcap">Figura 1 – Diagrama de Casos de Uso (UML 2.x)</div>
+  </div>
+  <div class="pg-num">7</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== CLASSES ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>7. Diagrama UML – Classes</h1>
+  <div class="callout">Entidades do domínio com atributos, métodos e relacionamentos. <strong>Token</strong> posicionado ao lado de <strong>Usuario</strong>; todas as setas trafegam pelo espaço externo às caixas.</div>
+  <div class="dw">
+    <svg viewBox="0 0 760 585" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New',monospace" font-size="8.5">
+      <defs>
+        <marker id="arr2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L0,9 L9,4.5 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <!-- Token -->
+      <rect x="10" y="15" width="205" height="143" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.6" rx="2"/>
+      <rect x="10" y="15" width="205" height="22" fill="#a855f7" rx="2"/>
+      <text x="112" y="30" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Token</text>
+      <line x1="10" y1="37" x2="215" y2="37" stroke="#a855f7" stroke-width="1"/>
+      <text x="18" y="50" fill="#1e293b">- id : Long</text>
+      <text x="18" y="63" fill="#1e293b">- saldo : Integer</text>
+      <text x="18" y="76" fill="#1e293b">- tipo : TipoToken</text>
+      <text x="18" y="89" fill="#1e293b">- quantidade : Integer</text>
+      <text x="18" y="102" fill="#1e293b">- motivo : String</text>
+      <text x="18" y="115" fill="#1e293b">- data : Date</text>
+      <line x1="10" y1="122" x2="215" y2="122" stroke="#a855f7" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="18" y="135" fill="#1e293b">+ debitar() : void</text>
+      <text x="18" y="148" fill="#1e293b">+ creditar() : void</text>
+      <!-- Usuario -->
+      <rect x="233" y="15" width="220" height="169" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="233" y="15" width="220" height="22" fill="#0f3460" rx="2"/>
+      <text x="343" y="30" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Usuario</text>
+      <line x1="233" y1="37" x2="453" y2="37" stroke="#0f3460" stroke-width="1"/>
+      <text x="241" y="50" fill="#1e293b">- id : Long</text>
+      <text x="241" y="63" fill="#1e293b">- nome : String</text>
+      <text x="241" y="76" fill="#1e293b">- email : String</text>
+      <text x="241" y="89" fill="#1e293b">- senhaHash : String</text>
+      <text x="241" y="102" fill="#1e293b">- bio : String</text>
+      <text x="241" y="115" fill="#1e293b">- fotoPerfil : String</text>
+      <text x="241" y="128" fill="#1e293b">- reputacao : Double</text>
+      <text x="241" y="141" fill="#1e293b">- dataCadastro : Date</text>
+      <line x1="233" y1="148" x2="453" y2="148" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="241" y="161" fill="#1e293b">+ autenticar() : Boolean</text>
+      <text x="241" y="174" fill="#1e293b">+ calcularReputacao() : Double</text>
+      <!-- Notificacao -->
+      <rect x="471" y="15" width="205" height="143" fill="#fce7f3" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="471" y="15" width="205" height="22" fill="#0f3460" rx="2"/>
+      <text x="573" y="30" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Notificacao</text>
+      <line x1="471" y1="37" x2="676" y2="37" stroke="#0f3460" stroke-width="1"/>
+      <text x="479" y="50" fill="#1e293b">- id : Long</text>
+      <text x="479" y="63" fill="#1e293b">- mensagem : String</text>
+      <text x="479" y="76" fill="#1e293b">- lida : Boolean</text>
+      <text x="479" y="89" fill="#1e293b">- dataCriacao : Date</text>
+      <text x="479" y="102" fill="#1e293b">- tipo : String = "INTERNA"</text>
+      <line x1="471" y1="109" x2="676" y2="109" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="479" y="122" fill="#1e293b">+ marcarComoLida() : void</text>
+      <text x="479" y="135" fill="#1e293b">+ listarPorUsuario() : List</text>
+      <text x="479" y="148" fill="#1e293b">+ contar() : Integer</text>
+      <!-- Habilidade -->
+      <rect x="10" y="235" width="205" height="156" fill="#fce7f3" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="10" y="235" width="205" height="22" fill="#0f3460" rx="2"/>
+      <text x="112" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Habilidade</text>
+      <line x1="10" y1="257" x2="215" y2="257" stroke="#0f3460" stroke-width="1"/>
+      <text x="18" y="270" fill="#1e293b">- id : Long</text>
+      <text x="18" y="283" fill="#1e293b">- titulo : String</text>
+      <text x="18" y="296" fill="#1e293b">- descricao : String</text>
+      <text x="18" y="309" fill="#1e293b">- preco : Double</text>
+      <text x="18" y="322" fill="#1e293b">- disponivel : Boolean</text>
+      <text x="18" y="335" fill="#1e293b">- dataCriacao : Date</text>
+      <line x1="10" y1="342" x2="215" y2="342" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="18" y="355" fill="#1e293b">+ anunciar() : void</text>
+      <text x="18" y="368" fill="#1e293b">+ desativar() : void</text>
+      <text x="18" y="381" fill="#1e293b">+ editar() : void</text>
+      <!-- Solicitacao -->
+      <rect x="233" y="235" width="220" height="182" fill="#fef9c3" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="233" y="235" width="220" height="22" fill="#0f3460" rx="2"/>
+      <text x="343" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Solicitacao</text>
+      <line x1="233" y1="257" x2="453" y2="257" stroke="#0f3460" stroke-width="1"/>
+      <text x="241" y="270" fill="#1e293b">- id : Long</text>
+      <text x="241" y="283" fill="#1e293b">- mensagem : String</text>
+      <text x="241" y="296" fill="#1e293b">- status : StatusSolicitacao</text>
+      <text x="241" y="309" fill="#1e293b">- dataEnvio : Date</text>
+      <text x="241" y="322" fill="#1e293b">- dataExpiracao : Date</text>
+      <line x1="233" y1="329" x2="453" y2="329" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="241" y="342" fill="#1e293b">+ aceitar() : void</text>
+      <text x="241" y="355" fill="#1e293b">+ rejeitar() : void</text>
+      <text x="241" y="368" fill="#1e293b">+ concluir() : void</text>
+      <text x="241" y="381" fill="#1e293b">+ expirar() : void</text>
+      <text x="241" y="394" fill="#1e293b">+ verificarExpiracao() : Boolean</text>
+      <text x="241" y="407" fill="#1e293b">+ debitarToken() : void</text>
+      <!-- Avaliacao -->
+      <rect x="471" y="235" width="205" height="143" fill="#ede9fe" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="471" y="235" width="205" height="22" fill="#0f3460" rx="2"/>
+      <text x="573" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Avaliacao</text>
+      <line x1="471" y1="257" x2="676" y2="257" stroke="#0f3460" stroke-width="1"/>
+      <text x="479" y="270" fill="#1e293b">- id : Long</text>
+      <text x="479" y="283" fill="#1e293b">- nota : Integer (1..5)</text>
+      <text x="479" y="296" fill="#1e293b">- comentario : String</text>
+      <text x="479" y="309" fill="#1e293b">- data : Date</text>
+      <line x1="471" y1="316" x2="676" y2="316" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="479" y="329" fill="#1e293b">+ registrar() : void</text>
+      <text x="479" y="342" fill="#1e293b">+ validarNota() : Boolean</text>
+      <text x="479" y="355" fill="#1e293b">+ calcularMedia() : Double</text>
+      <text x="479" y="368" fill="#1e293b">+ creditarToken() : void</text>
+      <!-- Categoria -->
+      <rect x="10" y="455" width="195" height="116" fill="#f0fdf4" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="10" y="455" width="195" height="22" fill="#0f3460" rx="2"/>
+      <text x="107" y="470" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">Categoria</text>
+      <line x1="10" y1="477" x2="205" y2="477" stroke="#0f3460" stroke-width="1"/>
+      <text x="18" y="490" fill="#1e293b">- id : Long</text>
+      <text x="18" y="503" fill="#1e293b">- nome : String</text>
+      <text x="18" y="516" fill="#1e293b">- icone : String</text>
+      <line x1="10" y1="523" x2="205" y2="523" stroke="#0f3460" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="18" y="536" fill="#1e293b">+ listar() : List&lt;Categoria&gt;</text>
+      <text x="18" y="549" fill="#1e293b">+ buscarPorId() : Categoria</text>
+      <!-- StatusEnum -->
+      <rect x="233" y="460" width="210" height="100" fill="#fff7ed" stroke="#0f3460" stroke-width="1.6" rx="2"/>
+      <rect x="233" y="460" width="210" height="22" fill="#0f3460" rx="2"/>
+      <text x="338" y="473" text-anchor="middle" font-size="8.8" font-weight="700" fill="#fff" font-family="'Segoe UI',sans-serif">«enumeration» StatusSolicitacao</text>
+      <line x1="233" y1="482" x2="443" y2="482" stroke="#0f3460" stroke-width="1"/>
+      <text x="338" y="496" text-anchor="middle" fill="#1e293b">PENDENTE</text>
+      <text x="338" y="510" text-anchor="middle" fill="#1e293b">ACEITA</text>
+      <text x="338" y="524" text-anchor="middle" fill="#1e293b">CONCLUIDA</text>
+      <text x="338" y="538" text-anchor="middle" fill="#1e293b">EXPIRADA</text>
+      <!-- RELATIONSHIPS -->
+      <line x1="233" y1="90" x2="215" y2="90" stroke="#a855f7" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="230" y="84" font-size="8" fill="#a855f7" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="196" y="84" font-size="8" fill="#a855f7" font-family="'Segoe UI',sans-serif">0..*</text>
+      <text x="205" y="104" font-size="7.5" fill="#a855f7" font-style="italic" font-family="'Segoe UI',sans-serif">possui</text>
+      <line x1="453" y1="90" x2="471" y2="90" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="447" y="84" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="459" y="104" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">0..*</text>
+      <text x="448" y="114" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">recebe</text>
+      <line x1="343" y1="184" x2="343" y2="235" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="348" y="200" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="348" y="230" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">0..*</text>
+      <text x="356" y="214" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">envia</text>
+      <path d="M280,184 L280,215 L112,215 L112,235" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="285" y="200" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="117" y="231" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">0..*</text>
+      <text x="168" y="210" font-size="7.5" fill="#888" text-anchor="middle" font-style="italic" font-family="'Segoe UI',sans-serif">publica</text>
+      <line x1="215" y1="305" x2="233" y2="305" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="207" y="299" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="218" y="299" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">0..*</text>
+      <text x="168" y="296" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">origina</text>
+      <line x1="107" y1="391" x2="107" y2="455" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="112" y="408" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">N</text>
+      <text x="112" y="450" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="118" y="426" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">pertence</text>
+      <line x1="453" y1="300" x2="471" y2="300" stroke="#475569" stroke-width="1.4" marker-end="url(#arr2)"/>
+      <text x="445" y="294" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">1</text>
+      <text x="456" y="294" font-size="8" fill="#475569" font-family="'Segoe UI',sans-serif">0..1</text>
+      <text x="448" y="315" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">gera</text>
+      <line x1="338" y1="417" x2="338" y2="460" stroke="#475569" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
+      <text x="345" y="442" font-size="7.5" fill="#888" font-style="italic" font-family="'Segoe UI',sans-serif">«uses»</text>
+    </svg>
+    <div class="dcap">Figura 2 – Diagrama de Classes UML</div>
+  </div>
+  <div class="pg-num">8</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== MER ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>8. Modelo Entidade-Relacionamento</h1>
+  <div class="callout">Estrutura lógica do banco de dados <strong>SQLite</strong>. PK = chave primária · FK = chave estrangeira. A tabela <strong>TRANSACAO_TOKEN</strong> suporta o sistema de créditos da seção 4.</div>
+  <div class="dw">
+    <svg viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <rect x="260" y="10" width="215" height="175" rx="4" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="260" y="10" width="215" height="24" rx="4" fill="#0f3460"/>
+      <text x="367" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">USUARIO</text>
+      <text x="268" y="47" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="268" y="60" font-size="8.8">  nome · VARCHAR(150)</text>
+      <text x="268" y="73" font-size="8.8">  email · VARCHAR(150) UNIQUE</text>
+      <text x="268" y="86" font-size="8.8">  senha_hash · VARCHAR(255)</text>
+      <text x="268" y="99" font-size="8.8">  bio · TEXT</text>
+      <text x="268" y="112" font-size="8.8">  foto_perfil · VARCHAR(255)</text>
+      <text x="268" y="125" font-size="8.8">  reputacao · DECIMAL(3,2)</text>
+      <text x="268" y="138" font-size="8.8">  saldo_tokens · INT</text>
+      <text x="268" y="151" font-size="8.8">  data_cadastro · DATETIME</text>
+      <rect x="15" y="10" width="195" height="106" rx="4" fill="#f0fdf4" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="15" y="10" width="195" height="24" rx="4" fill="#0f3460"/>
+      <text x="112" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">CATEGORIA</text>
+      <text x="23" y="47" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="23" y="60" font-size="8.8">  nome · VARCHAR(100)</text>
+      <text x="23" y="73" font-size="8.8">  icone · VARCHAR(50)</text>
+      <rect x="15" y="190" width="210" height="165" rx="4" fill="#fce7f3" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="15" y="190" width="210" height="24" rx="4" fill="#0f3460"/>
+      <text x="120" y="207" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">HABILIDADE</text>
+      <text x="23" y="227" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="23" y="240" font-size="8.8">  titulo · VARCHAR(150)</text>
+      <text x="23" y="253" font-size="8.8">  descricao · TEXT</text>
+      <text x="23" y="266" font-size="8.8">  preco · DECIMAL(10,2)</text>
+      <text x="23" y="279" font-size="8.8">  disponivel · TINYINT(1)</text>
+      <text x="23" y="292" font-size="8.8">  data_criacao · DATETIME</text>
+      <text x="23" y="305" font-size="8.8">🔗 usuario_id (FK)</text>
+      <text x="23" y="318" font-size="8.8">🔗 categoria_id (FK)</text>
+      <rect x="260" y="250" width="215" height="188" rx="4" fill="#fef9c3" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="260" y="250" width="215" height="24" rx="4" fill="#0f3460"/>
+      <text x="367" y="267" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">SOLICITACAO</text>
+      <text x="268" y="287" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="268" y="300" font-size="8.8">  mensagem · TEXT</text>
+      <text x="268" y="313" font-size="8.8">  status · ENUM</text>
+      <text x="268" y="326" font-size="8.8">  data_envio · DATETIME</text>
+      <text x="268" y="339" font-size="8.8">  data_expiracao · DATETIME</text>
+      <text x="268" y="352" font-size="8.8">  data_atualizacao · DATETIME</text>
+      <text x="268" y="365" font-size="8.8">🔗 solicitante_id (FK)</text>
+      <text x="268" y="378" font-size="8.8">🔗 habilidade_id (FK)</text>
+      <text x="268" y="391" font-size="8.8">🔗 prestador_id (FK)</text>
+      <rect x="535" y="250" width="210" height="152" rx="4" fill="#ede9fe" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="535" y="250" width="210" height="24" rx="4" fill="#0f3460"/>
+      <text x="640" y="267" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">AVALIACAO</text>
+      <text x="543" y="287" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="543" y="300" font-size="8.8">  nota · TINYINT (1..5)</text>
+      <text x="543" y="313" font-size="8.8">  comentario · TEXT</text>
+      <text x="543" y="326" font-size="8.8">  data · DATETIME</text>
+      <text x="543" y="339" font-size="8.8">🔗 solicitacao_id (FK) UNIQUE</text>
+      <text x="543" y="352" font-size="8.8">🔗 avaliador_id (FK)</text>
+      <rect x="535" y="10" width="210" height="152" rx="4" fill="#fce7f3" stroke="#0f3460" stroke-width="1.8"/>
+      <rect x="535" y="10" width="210" height="24" rx="4" fill="#0f3460"/>
+      <text x="640" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">NOTIFICACAO</text>
+      <text x="543" y="47" font-size="8.8">🔑 id (PK) · BIGINT</text>
+      <text x="543" y="60" font-size="8.8">  mensagem · TEXT</text>
+      <text x="543" y="73" font-size="8.8">  lida · TINYINT(1)</text>
+      <text x="543" y="86" font-size="8.8">  tipo · VARCHAR(20) = 'INTERNA'</text>
+      <text x="543" y="99" font-size="8.8">  data_criacao · DATETIME</text>
+      <text x="543" y="112" font-size="8.8">🔗 usuario_id (FK)</text>
+      <rect x="260" y="455" width="215" height="55" rx="4" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.8"/>
+      <rect x="260" y="455" width="215" height="24" rx="4" fill="#a855f7"/>
+      <text x="367" y="472" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">TRANSACAO_TOKEN</text>
+      <text x="268" y="491" font-size="8.8">🔑 id · tipo ENUM(GANHO,GASTO) · quantidade</text>
+      <text x="268" y="504" font-size="8.8">  motivo · data · 🔗 usuario_id (FK)</text>
+      <line x1="260" y1="97" x2="225" y2="275" stroke="#475569" stroke-width="1.4"/>
+      <text x="237" y="170" font-size="9" fill="#475569" font-weight="700">1</text><text x="215" y="268" font-size="9" fill="#475569" font-weight="700">N</text>
+      <line x1="110" y1="116" x2="110" y2="190" stroke="#475569" stroke-width="1.4"/>
+      <text x="116" y="146" font-size="9" fill="#475569" font-weight="700">1</text><text x="116" y="185" font-size="9" fill="#475569" font-weight="700">N</text>
+      <line x1="367" y1="185" x2="367" y2="250" stroke="#475569" stroke-width="1.4"/>
+      <text x="373" y="205" font-size="9" fill="#475569" font-weight="700">1</text><text x="373" y="245" font-size="9" fill="#475569" font-weight="700">N</text>
+      <line x1="225" y1="325" x2="260" y2="335" stroke="#475569" stroke-width="1.4"/>
+      <text x="228" y="322" font-size="9" fill="#475569" font-weight="700">1</text><text x="248" y="333" font-size="9" fill="#475569" font-weight="700">N</text>
+      <line x1="475" y1="344" x2="535" y2="325" stroke="#475569" stroke-width="1.4"/>
+      <text x="478" y="340" font-size="9" fill="#475569" font-weight="700">1</text><text x="520" y="320" font-size="9" fill="#475569" font-weight="700">0..1</text>
+      <line x1="475" y1="68" x2="535" y2="68" stroke="#475569" stroke-width="1.4"/>
+      <text x="479" y="63" font-size="9" fill="#475569" font-weight="700">1</text><text x="518" y="63" font-size="9" fill="#475569" font-weight="700">N</text>
+      <line x1="367" y1="438" x2="367" y2="455" stroke="#a855f7" stroke-width="1.4" stroke-dasharray="4,2"/>
+      <text x="373" y="449" font-size="9" fill="#a855f7" font-weight="700">1:N</text>
+    </svg>
+    <div class="dcap">Figura 3 – Modelo Entidade-Relacionamento (SQLite)</div>
+  </div>
+  <div class="pg-num">9</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== DDL ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>9. DDL – Criação de Tabelas com SQL</h1>
+  <div class="callout">Scripts de criação do banco de dados para <strong>SQLite 3</strong>. A ordem de criação respeita as dependências de chaves estrangeiras. Para ativar o suporte a FK no SQLite, execute <code>PRAGMA foreign_keys = ON;</code> ao abrir a conexão.</div>
+
+  <!-- Linha 1: banco + categoria + usuario -->
+  <div class="sql-grid" style="grid-template-columns:1fr 1fr 1fr;">
+    <div>
+      <div class="sql-lbl">1 · Banco de dados</div>
+      <div class="codeblock"><span class="kw">CREATE DATABASE IF NOT EXISTS</span>
+  localfreela
+  <span class="kw">DEFAULT CHARACTER SET</span> <span class="str">utf8mb4</span>
+  <span class="kw">DEFAULT COLLATE</span>
+    <span class="str">utf8mb4_unicode_ci</span>;
+
+<span class="kw">USE</span> localfreela;</div>
+    </div>
+    <div>
+      <div class="sql-lbl">2 · Tabela CATEGORIA</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">categoria</span> (
+  id    <span class="tp">BIGINT</span>
+        <span class="kw">NOT NULL
+        AUTO_INCREMENT</span>,
+  nome  <span class="tp">VARCHAR</span>(100)
+        <span class="kw">NOT NULL</span>,
+  icone <span class="tp">VARCHAR</span>(50),
+  <span class="kw">PRIMARY KEY</span> (id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+    <div>
+      <div class="sql-lbl">3 · Tabela USUARIO</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">usuario</span> (
+  id            <span class="tp">BIGINT</span> <span class="kw">NOT NULL
+                AUTO_INCREMENT</span>,
+  nome          <span class="tp">VARCHAR</span>(150) <span class="kw">NOT NULL</span>,
+  email         <span class="tp">VARCHAR</span>(150) <span class="kw">NOT NULL</span>,
+  senha_hash    <span class="tp">VARCHAR</span>(255) <span class="kw">NOT NULL</span>,
+  bio           <span class="tp">TEXT</span>,
+  foto_perfil   <span class="tp">VARCHAR</span>(255),
+  reputacao     <span class="tp">DECIMAL</span>(3,2)
+                <span class="kw">NOT NULL DEFAULT</span> <span class="str">0.00</span>,
+  saldo_tokens  <span class="tp">INT</span>
+                <span class="kw">NOT NULL DEFAULT</span> <span class="str">0</span>,
+  data_cadastro <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">UNIQUE KEY</span> uq_email (email)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+  </div>
+
+  <!-- Linha 2: habilidade + solicitacao -->
+  <div class="sql-grid" style="grid-template-columns:1fr 1fr;margin-top:4px;">
+    <div>
+      <div class="sql-lbl">4 · Tabela HABILIDADE</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">habilidade</span> (
+  id           <span class="tp">BIGINT</span> <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  titulo       <span class="tp">VARCHAR</span>(150) <span class="kw">NOT NULL</span>,
+  descricao    <span class="tp">TEXT</span>,
+  preco        <span class="tp">DECIMAL</span>(10,2) <span class="kw">NOT NULL</span>,
+  disponivel   <span class="tp">TINYINT</span>(1) <span class="kw">NOT NULL DEFAULT</span> <span class="str">1</span>,
+  data_criacao <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  usuario_id   <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  categoria_id <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">CONSTRAINT</span> fk_hab_usuario
+    <span class="kw">FOREIGN KEY</span> (usuario_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id),
+  <span class="kw">CONSTRAINT</span> fk_hab_categoria
+    <span class="kw">FOREIGN KEY</span> (categoria_id)
+    <span class="kw">REFERENCES</span> <span class="fn">categoria</span>(id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+    <div>
+      <div class="sql-lbl">5 · Tabela SOLICITACAO</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">solicitacao</span> (
+  id               <span class="tp">BIGINT</span> <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  mensagem         <span class="tp">TEXT</span>,
+  status           <span class="tp">ENUM</span>(<span class="str">'PENDENTE'</span>, <span class="str">'ACEITA'</span>,
+                   <span class="str">'CONCLUIDA'</span>, <span class="str">'EXPIRADA'</span>,
+                   <span class="str">'REJEITADA'</span>)
+                   <span class="kw">NOT NULL DEFAULT</span> <span class="str">'PENDENTE'</span>,
+  data_envio       <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  data_expiracao   <span class="tp">DATETIME</span>,
+  data_atualizacao <span class="tp">DATETIME</span>
+    <span class="kw">ON UPDATE</span> CURRENT_TIMESTAMP,
+  solicitante_id   <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  habilidade_id    <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  prestador_id     <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">CONSTRAINT</span> fk_sol_solicitante
+    <span class="kw">FOREIGN KEY</span> (solicitante_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id),
+  <span class="kw">CONSTRAINT</span> fk_sol_habilidade
+    <span class="kw">FOREIGN KEY</span> (habilidade_id)
+    <span class="kw">REFERENCES</span> <span class="fn">habilidade</span>(id),
+  <span class="kw">CONSTRAINT</span> fk_sol_prestador
+    <span class="kw">FOREIGN KEY</span> (prestador_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+  </div>
+
+  <!-- Linha 3: avaliacao + notificacao + transacao_token -->
+  <div class="sql-grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:4px;">
+    <div>
+      <div class="sql-lbl">6 · Tabela AVALIACAO</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">avaliacao</span> (
+  id             <span class="tp">BIGINT</span>
+    <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  nota           <span class="tp">TINYINT</span> <span class="kw">NOT NULL</span>,
+  comentario     <span class="tp">TEXT</span>,
+  data           <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  solicitacao_id <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  avaliador_id   <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">UNIQUE KEY</span> uq_aval_sol
+    (solicitacao_id),
+  <span class="kw">CONSTRAINT</span> ck_nota
+    <span class="kw">CHECK</span> (nota <span class="kw">BETWEEN</span> <span class="str">1</span> <span class="kw">AND</span> <span class="str">5</span>),
+  <span class="kw">CONSTRAINT</span> fk_aval_sol
+    <span class="kw">FOREIGN KEY</span> (solicitacao_id)
+    <span class="kw">REFERENCES</span> <span class="fn">solicitacao</span>(id),
+  <span class="kw">CONSTRAINT</span> fk_aval_avaliador
+    <span class="kw">FOREIGN KEY</span> (avaliador_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+    <div>
+      <div class="sql-lbl">7 · Tabela NOTIFICACAO</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">notificacao</span> (
+  id           <span class="tp">BIGINT</span>
+    <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  mensagem     <span class="tp">TEXT</span> <span class="kw">NOT NULL</span>,
+  lida         <span class="tp">TINYINT</span>(1)
+    <span class="kw">NOT NULL DEFAULT</span> <span class="str">0</span>,
+  tipo         <span class="tp">VARCHAR</span>(20)
+    <span class="kw">NOT NULL DEFAULT</span> <span class="str">'INTERNA'</span>,
+  data_criacao <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  usuario_id   <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">CONSTRAINT</span> fk_noti_usuario
+    <span class="kw">FOREIGN KEY</span> (usuario_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+    <div>
+      <div class="sql-lbl">8 · Tabela TRANSACAO_TOKEN</div>
+      <div class="codeblock"><span class="kw">CREATE TABLE</span> <span class="fn">transacao_token</span> (
+  id         <span class="tp">BIGINT</span>
+    <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  tipo       <span class="tp">ENUM</span>(<span class="str">'GANHO'</span>, <span class="str">'GASTO'</span>)
+    <span class="kw">NOT NULL</span>,
+  quantidade <span class="tp">INT</span> <span class="kw">NOT NULL</span>,
+  motivo     <span class="tp">VARCHAR</span>(255),
+  data       <span class="tp">DATETIME</span> <span class="kw">NOT NULL
+    DEFAULT</span> CURRENT_TIMESTAMP,
+  usuario_id <span class="tp">BIGINT</span> <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">CONSTRAINT</span> fk_token_usuario
+    <span class="kw">FOREIGN KEY</span> (usuario_id)
+    <span class="kw">REFERENCES</span> <span class="fn">usuario</span>(id)
+) <span class="kw">ENGINE</span>=InnoDB;</div>
+    </div>
+  </div>
+
+  <div class="callout ok" style="margin-top:8px;font-size:9pt;">
+    <strong>✔ Ordem de criação:</strong> categoria → usuario → habilidade → solicitacao → avaliacao → notificacao → transacao_token. Esta sequência garante que todas as <strong>FK</strong> já referenciem tabelas existentes.
+  </div>
+  <div class="pg-num">10</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== ENDPOINTS REST ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>10. Endpoints REST</h1>
+  <div class="callout">Todos os endpoints seguem o padrão RESTful. Rotas marcadas com 🔒 exigem autenticação. Respostas em formato <code>application/json</code>.</div>
+  <h2>Usuários</h2>
+  <table><thead><tr><th style="width:70px">Método</th><th style="width:200px">Endpoint</th><th>Descrição</th><th style="width:55px">Auth</th></tr></thead>
+  <tbody>
+    <tr><td><span class="m POST">POST</span></td><td><code>/usuarios</code></td><td>Cadastrar novo usuário</td><td>–</td></tr>
+    <tr><td><span class="m POST">POST</span></td><td><code>/usuarios/login</code></td><td>Autenticar e obter token de sessão</td><td>–</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/usuarios/{id}</code></td><td>Obter perfil público de um usuário</td><td>–</td></tr>
+    <tr><td><span class="m PUT">PUT</span></td><td><code>/usuarios/{id}</code></td><td>Atualizar dados do perfil autenticado</td><td>🔒</td></tr>
+  </tbody></table>
+  <h2>Categorias e Habilidades</h2>
+  <table><thead><tr><th style="width:70px">Método</th><th style="width:200px">Endpoint</th><th>Descrição</th><th style="width:55px">Auth</th></tr></thead>
+  <tbody>
+    <tr><td><span class="m GET">GET</span></td><td><code>/categorias</code></td><td>Listar todas as categorias disponíveis</td><td>–</td></tr>
+    <tr><td><span class="m POST">POST</span></td><td><code>/categorias</code></td><td>Criar nova categoria (admin)</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/habilidades</code></td><td>Listar/buscar habilidades. Params: <code>?q=&amp;categoria=</code></td><td>–</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/habilidades/{id}</code></td><td>Obter detalhes de uma habilidade</td><td>–</td></tr>
+    <tr><td><span class="m POST">POST</span></td><td><code>/habilidades</code></td><td>Criar anúncio de habilidade com preço fixo</td><td>🔒</td></tr>
+    <tr><td><span class="m PUT">PUT</span></td><td><code>/habilidades/{id}</code></td><td>Editar habilidade (somente dono)</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/habilidades/{id}/disponibilidade</code></td><td>Ativar ou desativar anúncio</td><td>🔒</td></tr>
+    <tr><td><span class="m DELETE">DELETE</span></td><td><code>/habilidades/{id}</code></td><td>Remover anúncio (somente dono)</td><td>🔒</td></tr>
+  </tbody></table>
+  <h2>Solicitações e Avaliações</h2>
+  <table><thead><tr><th style="width:70px">Método</th><th style="width:200px">Endpoint</th><th>Descrição</th><th style="width:55px">Auth</th></tr></thead>
+  <tbody>
+    <tr><td><span class="m POST">POST</span></td><td><code>/solicitacoes</code></td><td>Criar solicitação — debita tokens (RF13)</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/solicitacoes/enviadas</code></td><td>Listar solicitações enviadas pelo usuário logado</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/solicitacoes/recebidas</code></td><td>Listar solicitações recebidas pelo prestador</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/solicitacoes/{id}/aceitar</code></td><td>Prestador aceita → status ACEITA</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/solicitacoes/{id}/rejeitar</code></td><td>Prestador rejeita solicitação</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/solicitacoes/{id}/concluir</code></td><td>Marcar como concluído — credita tokens (RF14)</td><td>🔒</td></tr>
+    <tr><td><span class="m POST">POST</span></td><td><code>/avaliacoes</code></td><td>Registrar avaliação — credita tokens se nota ≥ 4 (RF14)</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/avaliacoes/usuario/{id}</code></td><td>Listar avaliações recebidas por um prestador</td><td>–</td></tr>
+  </tbody></table>
+  <h2>Tokens, Notificações e Ranking</h2>
+  <table><thead><tr><th style="width:70px">Método</th><th style="width:200px">Endpoint</th><th>Descrição</th><th style="width:55px">Auth</th></tr></thead>
+  <tbody>
+    <tr><td><span class="m GET">GET</span></td><td><code>/tokens/saldo</code></td><td>Consultar saldo atual de tokens do usuário logado</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/tokens/historico</code></td><td>Histórico de transações (ganhos e gastos)</td><td>🔒</td></tr>
+    <tr><td><span class="m POST">POST</span></td><td><code>/tokens/gastar</code></td><td>Gastar tokens em uma ação específica</td><td>🔒</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/ranking/prestadores</code></td><td>Top prestadores da semana (público)</td><td>–</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/ranking/contratantes</code></td><td>Top contratantes da semana (público)</td><td>–</td></tr>
+    <tr><td><span class="m GET">GET</span></td><td><code>/notificacoes</code></td><td>Listar notificações internas do usuário logado</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/notificacoes/{id}/lida</code></td><td>Marcar notificação como lida</td><td>🔒</td></tr>
+    <tr><td><span class="m PATCH">PATCH</span></td><td><code>/notificacoes/todas/lida</code></td><td>Marcar todas as notificações como lidas</td><td>🔒</td></tr>
+  </tbody></table>
+  <div class="pg-num">11</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== DIAGRAMA DE ESTADOS ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>11. Diagrama de Estados – Solicitação</h1>
+  <div class="callout">Ciclo de vida de uma <strong>Solicitação</strong> na Local Freela. O débito de tokens ocorre na criação.</div>
+  <div class="dw">
+    <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <defs>
+        <marker id="sa2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L0,9 L9,4.5 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <circle cx="60" cy="200" r="14" fill="#1a1a2e"/>
+      <text x="60" y="224" text-anchor="middle" font-size="8.5" fill="#555">início</text>
+      <rect x="115" y="165" width="140" height="70" rx="30" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+      <text x="185" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="#78350f">PENDENTE</text>
+      <text x="185" y="212" text-anchor="middle" font-size="8.5" fill="#92400e">Aguardando resposta</text>
+      <text x="185" y="226" text-anchor="middle" font-size="8.5" fill="#92400e">do prestador</text>
+      <rect x="335" y="90" width="140" height="70" rx="30" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+      <text x="405" y="121" text-anchor="middle" font-size="11" font-weight="700" fill="#064e3b">ACEITA</text>
+      <text x="405" y="137" text-anchor="middle" font-size="8.5" fill="#065f46">Prestador aceitou.</text>
+      <text x="405" y="151" text-anchor="middle" font-size="8.5" fill="#065f46">Em andamento</text>
+      <rect x="560" y="90" width="145" height="70" rx="30" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="632" y="121" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">CONCLUÍDA</text>
+      <text x="632" y="137" text-anchor="middle" font-size="8.5" fill="#1e40af">Serviço finalizado.</text>
+      <text x="632" y="151" text-anchor="middle" font-size="8.5" fill="#1e40af">Tokens creditados</text>
+      <rect x="335" y="295" width="140" height="70" rx="30" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+      <text x="405" y="326" text-anchor="middle" font-size="11" font-weight="700" fill="#7f1d1d">EXPIRADA</text>
+      <text x="405" y="342" text-anchor="middle" font-size="8.5" fill="#991b1b">Prazo esgotado ou</text>
+      <text x="405" y="356" text-anchor="middle" font-size="8.5" fill="#991b1b">sem resposta</text>
+      <rect x="115" y="295" width="140" height="70" rx="30" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+      <text x="185" y="326" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">REJEITADA</text>
+      <text x="185" y="342" text-anchor="middle" font-size="8.5" fill="#6b7280">Prestador recusou.</text>
+      <text x="185" y="356" text-anchor="middle" font-size="8.5" fill="#6b7280">Fluxo encerrado</text>
+      <circle cx="650" cy="230" r="14" fill="none" stroke="#3b82f6" stroke-width="2"/>
+      <circle cx="650" cy="230" r="9" fill="#3b82f6"/>
+      <text x="650" y="254" text-anchor="middle" font-size="8.5" fill="#555">fim (ok)</text>
+      <circle cx="185" cy="390" r="14" fill="none" stroke="#6b7280" stroke-width="2"/>
+      <circle cx="185" cy="390" r="9" fill="#6b7280"/>
+      <circle cx="405" cy="390" r="14" fill="none" stroke="#ef4444" stroke-width="2"/>
+      <circle cx="405" cy="390" r="9" fill="#ef4444"/>
+      <line x1="74" y1="200" x2="115" y2="200" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <path d="M255,185 Q295,155 335,140" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <text x="275" y="152" font-size="8.5" fill="#065f46" font-weight="600">aceitar()</text>
+      <line x1="185" y1="235" x2="185" y2="295" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <text x="192" y="272" font-size="8.5" fill="#374151" font-weight="600">rejeitar()</text>
+      <path d="M255,215 Q310,260 335,315" fill="none" stroke="#475569" stroke-width="1.6" stroke-dasharray="5,3" marker-end="url(#sa2)"/>
+      <text x="268" y="268" font-size="8" fill="#dc2626" font-style="italic">expirar() [sistema]</text>
+      <line x1="475" y1="125" x2="560" y2="125" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <text x="490" y="116" font-size="8.5" fill="#1e40af" font-weight="600">concluir()</text>
+      <path d="M405,160 Q405,220 405,295" fill="none" stroke="#475569" stroke-width="1.6" stroke-dasharray="5,3" marker-end="url(#sa2)"/>
+      <text x="412" y="232" font-size="8" fill="#dc2626" font-style="italic">expirar() [sistema]</text>
+      <line x1="650" y1="160" x2="650" y2="216" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <line x1="185" y1="365" x2="185" y2="376" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <line x1="405" y1="365" x2="405" y2="376" stroke="#475569" stroke-width="1.6" marker-end="url(#sa2)"/>
+      <rect x="540" y="295" width="200" height="85" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.2"/>
+      <text x="640" y="313" text-anchor="middle" font-size="9" font-weight="700" fill="#374151">Legenda</text>
+      <line x1="555" y1="327" x2="590" y2="327" stroke="#475569" stroke-width="1.6"/>
+      <text x="597" y="331" font-size="8.5" fill="#555">Ação do usuário</text>
+      <line x1="555" y1="344" x2="590" y2="344" stroke="#475569" stroke-width="1.6" stroke-dasharray="5,3"/>
+      <text x="597" y="348" font-size="8.5" fill="#555">Ação automática (sistema)</text>
+      <circle cx="560" cy="362" r="5" fill="#1a1a2e"/>
+      <text x="597" y="366" font-size="8.5" fill="#555">Estado inicial</text>
+      <circle cx="560" cy="375" r="6" fill="none" stroke="#475569" stroke-width="1.5"/>
+      <circle cx="560" cy="375" r="3.5" fill="#475569"/>
+      <text x="597" y="379" font-size="8.5" fill="#555">Estado final</text>
+    </svg>
+    <div class="dcap">Figura 4 – Diagrama de Máquina de Estados – Ciclo de Vida de Solicitacao</div>
+  </div>
+  <h2 style="margin-top:14px">Tabela de Transições</h2>
+  <table>
+    <thead><tr><th>Estado Atual</th><th>Evento / Gatilho</th><th>Responsável</th><th>Próximo Estado</th></tr></thead>
+    <tbody>
+      <tr><td>–</td><td>Criação de solicitação — <strong>debita 2 tokens</strong></td><td>Solicitante</td><td><strong>PENDENTE</strong></td></tr>
+      <tr><td>PENDENTE</td><td>Prestador aceita (<code>PATCH .../aceitar</code>)</td><td>Prestador</td><td><strong>ACEITA</strong></td></tr>
+      <tr><td>PENDENTE</td><td>Prestador rejeita (<code>PATCH .../rejeitar</code>)</td><td>Prestador</td><td><strong>REJEITADA</strong></td></tr>
+      <tr><td>PENDENTE</td><td>Data de expiração atingida (job automático)</td><td>Sistema</td><td><strong>EXPIRADA</strong></td></tr>
+      <tr><td>ACEITA</td><td>Conclusão do serviço — <strong>credita 5 tokens</strong></td><td>Prestador / Solicitante</td><td><strong>CONCLUÍDA</strong></td></tr>
+      <tr><td>ACEITA</td><td>Data de expiração atingida (job automático)</td><td>Sistema</td><td><strong>EXPIRADA</strong></td></tr>
+      <tr><td>CONCLUÍDA</td><td>Avaliação registrada — credita tokens se nota ≥ 4</td><td>Solicitante</td><td>CONCLUÍDA <em>(avaliação registrada)</em></td></tr>
+    </tbody>
+  </table>
+  <div class="pg-num">12</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== PROJETO - DESIGN pt1 ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1>12. Projeto – Design</h1>
+  <div class="callout">Decisões de design e arquitetura do sistema baseadas nos requisitos das seções anteriores.</div>
+  <h2>12.1 Arquitetura do Sistema</h2>
+  <p>O sistema adota a arquitetura <strong>Cliente-Servidor</strong> com o padrão <strong>MVC</strong> no backend. A plataforma é exclusivamente web no estágio atual, com possibilidade de expansão futura para mobile.</p>
+  <div class="dw">
+    <svg viewBox="0 0 700 262" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <defs>
+        <marker id="da" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L0,9 L9,4.5 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <rect x="55" y="8" width="590" height="58" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.8"/>
+      <text x="350" y="28" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e40af">Cliente – Navegador Web</text>
+      <text x="350" y="44" text-anchor="middle" font-size="9" fill="#3b82f6">HTML / CSS · JavaScript · Fetch API / AJAX · Interface Responsiva</text>
+      <text x="350" y="57" text-anchor="middle" font-size="8.5" fill="#3b82f6">Exibe páginas · Envia formulários · Atualiza dados dinamicamente (sem recarregar)</text>
+      <line x1="230" y1="66" x2="230" y2="86" stroke="#475569" stroke-width="1.3" marker-end="url(#da)"/>
+      <line x1="270" y1="86" x2="270" y2="66" stroke="#475569" stroke-width="1.3" marker-end="url(#da)"/>
+      <text x="218" y="75" text-anchor="end" font-size="7.5" fill="#475569" font-style="italic">Requisição HTTP</text>
+      <text x="282" y="80" text-anchor="start" font-size="7.5" fill="#475569" font-style="italic">Resposta JSON</text>
+      <rect x="8" y="86" width="684" height="105" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8"/>
+      <text x="350" y="103" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">Servidor – Backend (Python) · Padrão MVC</text>
+      <rect x="22" y="108" width="200" height="72" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+      <text x="122" y="123" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14532d">Controller</text>
+      <text x="122" y="137" text-anchor="middle" font-size="8" fill="#166534">Roteamento de Requisições</text>
+      <text x="122" y="149" text-anchor="middle" font-size="8" fill="#166534">Validação de Entrada</text>
+      <text x="122" y="161" text-anchor="middle" font-size="8" fill="#166534">Controle de Acesso</text>
+      <text x="122" y="173" text-anchor="middle" font-size="8" fill="#166534">Respostas HTTP / JSON</text>
+      <line x1="222" y1="144" x2="242" y2="144" stroke="#15803d" stroke-width="1.2" marker-end="url(#da)"/>
+      <rect x="242" y="108" width="216" height="72" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+      <text x="350" y="123" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14532d">Service</text>
+      <text x="350" y="137" text-anchor="middle" font-size="8" fill="#166534">Regras de Negócio</text>
+      <text x="350" y="149" text-anchor="middle" font-size="8" fill="#166534">Lógica de Tokens e Ranking</text>
+      <text x="350" y="161" text-anchor="middle" font-size="8" fill="#166534">Gestão de Solicitações</text>
+      <text x="350" y="173" text-anchor="middle" font-size="8" fill="#166534">Cálculo de Reputação</text>
+      <line x1="458" y1="144" x2="478" y2="144" stroke="#15803d" stroke-width="1.2" marker-end="url(#da)"/>
+      <rect x="478" y="108" width="200" height="72" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+      <text x="578" y="123" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14532d">Repository</text>
+      <text x="578" y="137" text-anchor="middle" font-size="8" fill="#166534">Consultas SQL / ORM</text>
+      <text x="578" y="149" text-anchor="middle" font-size="8" fill="#166534">Persistência de Dados</text>
+      <text x="578" y="161" text-anchor="middle" font-size="8" fill="#166534">Mapeamento de Entidades</text>
+      <text x="578" y="173" text-anchor="middle" font-size="8" fill="#166534">Transações Atômicas (Tokens)</text>
+      <line x1="350" y1="191" x2="350" y2="211" stroke="#475569" stroke-width="1.3" marker-end="url(#da)"/>
+      <text x="360" y="205" font-size="7.5" fill="#475569" font-style="italic">Consultas SQL</text>
+      <rect x="55" y="211" width="590" height="42" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+      <text x="350" y="228" text-anchor="middle" font-size="10.5" font-weight="700" fill="#92400e">SQLite 3 – Banco de Dados Relacional (embutido)</text>
+      <text x="350" y="244" text-anchor="middle" font-size="8.5" fill="#78350f">usuario · habilidade · solicitacao · avaliacao · categoria · transacao_token · notificacao</text>
+    </svg>
+    <div class="dcap">Figura 5 – Arquitetura Cliente-Servidor com padrão MVC</div>
+  </div>
+  <h2>12.2 Escolha de Tecnologias</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Tecnologia</th><th>Justificativa</th><th style="width:70px">Status</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Python (Django REST Framework)</td><td>Framework maduro com suporte nativo a MVC, ORM e REST; integração nativa com SQLite</td><td><span class="tag ok" style="background:#dcfce7;color:#166534;">Definido</span></td></tr>
+      <tr><td>Frontend</td><td>HTML, CSS, JavaScript</td><td>Tecnologias nativas do navegador; Fetch API para chamadas dinâmicas</td><td><span class="tag ok" style="background:#dcfce7;color:#166534;">Definido</span></td></tr>
+      <tr><td>Banco de Dados</td><td>SQLite 3</td><td>Banco relacional leve, sem necessidade de servidor externo; nativo ao Python e ideal para a fase de desenvolvimento do projeto</td><td><span class="tag ok" style="background:#dcfce7;color:#166534;">Definido</span></td></tr>
+      <tr><td>Autenticação</td><td>A definir (ex.: JWT, sessão)</td><td>Depende de orientação do professor e capacidade da equipe</td><td><span class="tag media">Opcional</span></td></tr>
+      <tr><td>Segurança</td><td>A definir (ex.: bcrypt, HTTPS)</td><td>Depende de orientação do professor e capacidade da equipe</td><td><span class="tag media">Opcional</span></td></tr>
+      <tr><td>ORM</td><td>Django ORM ou SQLAlchemy</td><td>Ambos compatíveis com Python e SQLite. Django ORM é nativo ao framework; SQLAlchemy é uma alternativa independente e amplamente adotada</td><td><span class="tag baixa">Sugerido</span></td></tr>
+    </tbody>
+  </table>
+  <div class="pg-num">13</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== PROJETO - DESIGN pt2 ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1 style="margin-top:0">12. Projeto – Design <span style="font-size:11pt;color:#888;">(continuação)</span></h1>
+  <h2>12.3 Modelagem do Banco de Dados</h2>
+  <p>O MER completo está documentado na <strong>Seção 8 (Figura 3)</strong> e o DDL na <strong>Seção 9</strong>. O banco de dados utilizado é o <strong>SQLite 3</strong>, embutido no Python sem necessidade de servidor externo. As sete entidades principais são: <code>categoria</code>, <code>usuario</code>, <code>habilidade</code>, <code>solicitacao</code>, <code>avaliacao</code>, <code>notificacao</code> e <code>transacao_token</code>. O campo <code>saldo_tokens</code> na tabela <code>usuario</code> é atualizado atomicamente a cada transação registrada em <code>transacao_token</code>.</p>
+  <table style="margin-bottom:14px;">
+    <thead><tr><th colspan="3">Entidade transacao_token – adição do sistema de tokens</th></tr>
+      <tr><th>Campo</th><th>Tipo MySQL</th><th>Descrição</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>INTEGER (PK, AUTOINCREMENT)</td><td>Identificador único da transação</td></tr>
+      <tr><td><code>usuario_id</code></td><td>INTEGER (FK)</td><td>Usuário cujo saldo foi alterado</td></tr>
+      <tr><td><code>tipo</code></td><td>TEXT ('GANHO' / 'GASTO')</td><td>Indica se foi crédito ou débito</td></tr>
+      <tr><td><code>quantidade</code></td><td>INTEGER</td><td>Número de tokens movimentados</td></tr>
+      <tr><td><code>motivo</code></td><td>TEXT</td><td>Descrição da ação que gerou a transação</td></tr>
+      <tr><td><code>data</code></td><td>TEXT (ISO 8601, DEFAULT CURRENT_TIMESTAMP)</td><td>Data e hora da movimentação</td></tr>
+    </tbody>
+  </table>
+  <h2>12.4 Design das APIs</h2>
+  <p>Os endpoints completos estão na <strong>Seção 10</strong>. Abaixo, exemplos do fluxo de solicitação (com débito de tokens) e do ranking semanal.</p>
+  <div class="two-col">
+    <div>
+      <h3 style="font-size:9pt;margin-bottom:4px;">Requisição — POST /solicitacoes</h3>
+      <div class="codeblock" style="white-space:normal;"><span class="cm">// Body (JSON)</span>
+{
+  <span class="kw">"habilidade_id"</span>: <span class="str">42</span>,
+  <span class="kw">"mensagem"</span>: <span class="str">"Preciso de aulas..."</span>
+}</div>
+    </div>
+    <div>
+      <h3 style="font-size:9pt;margin-bottom:4px;">Resposta — 201 Created</h3>
+      <div class="codeblock" style="white-space:normal;">{
+  <span class="kw">"solicitacao_id"</span>: <span class="str">108</span>,
+  <span class="kw">"status"</span>: <span class="str">"PENDENTE"</span>,
+  <span class="kw">"tokens_debitados"</span>: <span class="str">2</span>,
+  <span class="kw">"saldo_atual"</span>: <span class="str">13</span>
+}</div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:4px;">
+    <div>
+      <h3 style="font-size:9pt;margin-bottom:4px;">Requisição — GET /ranking/prestadores</h3>
+      <div class="codeblock" style="white-space:normal;"><span class="cm">// Query params opcionais</span>
+GET /ranking/prestadores?semana=atual
+
+<span class="cm">// Sem body necessário</span></div>
+    </div>
+    <div>
+      <h3 style="font-size:9pt;margin-bottom:4px;">Resposta — 200 OK</h3>
+      <div class="codeblock" style="white-space:normal;">{
+  <span class="kw">"ranking"</span>: [
+    { <span class="kw">"pos"</span>:<span class="str">1</span>, <span class="kw">"nome"</span>:<span class="str">"Ana P."</span>, <span class="kw">"tokens"</span>:<span class="str">48</span> },
+    { <span class="kw">"pos"</span>:<span class="str">2</span>, <span class="kw">"nome"</span>:<span class="str">"João S."</span>, <span class="kw">"tokens"</span>:<span class="str">35</span> }
+  ]
+}</div>
+    </div>
+  </div>
+  <div class="pg-num">14</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<!-- ===== PROJETO - DESIGN pt3 ===== -->
+<div class="page">
+  <div class="accent"></div>
+  <h1 style="margin-top:0">12. Projeto – Design <span style="font-size:11pt;color:#888;">(continuação)</span></h1>
+  <h2>12.5 Protótipos de Interface</h2>
+  <h3 style="margin-bottom:6px;">Fluxo de Navegação Principal</h3>
+  <div class="dw">
+    <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <defs><marker id="fn" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 Z" fill="#475569"/></marker></defs>
+      <rect x="5" y="15" width="90" height="32" rx="4" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.2"/>
+      <text x="50" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f3460">Cadastro /</text>
+      <text x="50" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f3460">Login</text>
+      <line x1="95" y1="31" x2="115" y2="31" stroke="#475569" stroke-width="1.2" marker-end="url(#fn)"/>
+      <rect x="115" y="15" width="80" height="32" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.2"/>
+      <text x="155" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1e40af">Home /</text>
+      <text x="155" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1e40af">Busca</text>
+      <line x1="195" y1="31" x2="215" y2="31" stroke="#475569" stroke-width="1.2" marker-end="url(#fn)"/>
+      <rect x="215" y="15" width="90" height="32" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.2"/>
+      <text x="260" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1e40af">Detalhe</text>
+      <text x="260" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1e40af">Habilidade</text>
+      <line x1="305" y1="31" x2="325" y2="31" stroke="#475569" stroke-width="1.2" marker-end="url(#fn)"/>
+      <rect x="325" y="15" width="85" height="32" rx="4" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="367" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#78350f">Enviar</text>
+      <text x="367" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#78350f">Solicitação</text>
+      <line x1="410" y1="31" x2="430" y2="31" stroke="#475569" stroke-width="1.2" marker-end="url(#fn)"/>
+      <rect x="430" y="15" width="80" height="32" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2"/>
+      <text x="470" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#064e3b">Status /</text>
+      <text x="470" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#064e3b">Acompanhar</text>
+      <line x1="510" y1="31" x2="530" y2="31" stroke="#475569" stroke-width="1.2" marker-end="url(#fn)"/>
+      <rect x="530" y="15" width="75" height="32" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.2"/>
+      <text x="567" y="28" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5b21b6">Avaliar</text>
+      <text x="567" y="40" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5b21b6">Serviço</text>
+      <line x1="155" y1="47" x2="155" y2="68" stroke="#475569" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#fn)"/>
+      <rect x="100" y="68" width="110" height="28" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.2"/>
+      <text x="155" y="86" text-anchor="middle" font-size="8.5" font-weight="700" fill="#14532d">Meu Perfil / Histórico</text>
+      <line x1="155" y1="96" x2="155" y2="114" stroke="#475569" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#fn)"/>
+      <rect x="90" y="114" width="130" height="12" rx="3" fill="#fdf4ff" stroke="#a855f7" stroke-width="1"/>
+      <text x="155" y="123" text-anchor="middle" font-size="7.5" fill="#6b21a8">Tokens · Saldo · Ranking 🪙</text>
+    </svg>
+    <div class="dcap">Figura 6 – Fluxo de Navegação Principal</div>
+  </div>
+  <h3 style="margin-top:12px;margin-bottom:6px;">Wireframes das Telas Principais</h3>
+  <div class="dw">
+    <svg viewBox="0 0 755 265" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+      <!-- WF1 -->
+      <rect x="5" y="5" width="235" height="255" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="122" y="19" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f3460">Tela 1 – Home / Busca</text>
+      <rect x="10" y="23" width="225" height="18" rx="2" fill="#0f3460"/>
+      <text x="22" y="35" font-size="7" fill="#fff" font-weight="700">Local Freela</text>
+      <text x="105" y="35" font-size="7" fill="#aac">Buscar...</text>
+      <rect x="194" y="25" width="38" height="14" rx="2" fill="#a855f7"/>
+      <text x="213" y="35" text-anchor="middle" font-size="7" fill="#fff">🪙 12</text>
+      <rect x="10" y="44" width="225" height="14" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="18" y="54" font-size="7" fill="#94a3b8">🔍 Buscar habilidade ou profissional...</text>
+      <rect x="10" y="62" width="38" height="11" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="0.8"/>
+      <text x="29" y="70" text-anchor="middle" font-size="6.5" fill="#1e40af">Todas</text>
+      <rect x="53" y="62" width="24" height="11" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>
+      <text x="65" y="70" text-anchor="middle" font-size="6.5" fill="#64748b">TI</text>
+      <rect x="82" y="62" width="38" height="11" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>
+      <text x="101" y="70" text-anchor="middle" font-size="6.5" fill="#64748b">Educação</text>
+      <rect x="125" y="62" width="30" height="11" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>
+      <text x="140" y="70" text-anchor="middle" font-size="6.5" fill="#64748b">Design</text>
+      <rect x="160" y="62" width="34" height="11" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>
+      <text x="177" y="70" text-anchor="middle" font-size="6.5" fill="#64748b">Idiomas</text>
+      <rect x="10" y="77" width="107" height="58" rx="3" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="10" y="77" width="107" height="16" rx="3" fill="#0f3460"/>
+      <text x="63" y="88" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">Aulas de Matemática</text>
+      <text x="16" y="103" font-size="6.5" fill="#64748b">★★★★☆ 4.2 · João S.</text>
+      <text x="16" y="113" font-size="6.5" fill="#64748b">Educação · R$ 50,00</text>
+      <rect x="14" y="121" width="99" height="10" rx="2" fill="#dbeafe"/>
+      <text x="63" y="129" text-anchor="middle" font-size="6.5" fill="#1e40af">Solicitar (🪙 2 tokens)</text>
+      <rect x="122" y="77" width="108" height="58" rx="3" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="122" y="77" width="108" height="16" rx="3" fill="#0f3460"/>
+      <text x="176" y="88" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">Edição de Vídeo</text>
+      <text x="128" y="103" font-size="6.5" fill="#64748b">★★★★★ 5.0 · Ana P.</text>
+      <text x="128" y="113" font-size="6.5" fill="#64748b">Design · R$ 120,00</text>
+      <rect x="126" y="121" width="100" height="10" rx="2" fill="#dbeafe"/>
+      <text x="176" y="129" text-anchor="middle" font-size="6.5" fill="#1e40af">Solicitar (🪙 2 tokens)</text>
+      <rect x="10" y="140" width="107" height="58" rx="3" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="10" y="140" width="107" height="16" rx="3" fill="#0f3460"/>
+      <text x="63" y="151" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">Conserto de PC</text>
+      <text x="16" y="166" font-size="6.5" fill="#64748b">★★★★☆ 4.5 · Lucas R.</text>
+      <text x="16" y="176" font-size="6.5" fill="#64748b">TI · R$ 80,00</text>
+      <rect x="14" y="184" width="99" height="10" rx="2" fill="#dbeafe"/>
+      <text x="63" y="192" text-anchor="middle" font-size="6.5" fill="#1e40af">Solicitar (🪙 2 tokens)</text>
+      <rect x="122" y="140" width="108" height="58" rx="3" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="122" y="140" width="108" height="16" rx="3" fill="#0f3460"/>
+      <text x="176" y="151" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">Inglês Conversação</text>
+      <text x="128" y="166" font-size="6.5" fill="#64748b">★★★☆☆ 3.8 · Carla M.</text>
+      <text x="128" y="176" font-size="6.5" fill="#64748b">Idiomas · R$ 60,00</text>
+      <rect x="126" y="184" width="100" height="10" rx="2" fill="#dbeafe"/>
+      <text x="176" y="192" text-anchor="middle" font-size="6.5" fill="#1e40af">Solicitar (🪙 2 tokens)</text>
+      <text x="122" y="248" text-anchor="middle" font-size="8" fill="#94a3b8">← 1  [2]  3  →</text>
+      <!-- WF2 -->
+      <rect x="260" y="5" width="235" height="255" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="377" y="19" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f3460">Tela 2 – Perfil do Usuário</text>
+      <rect x="265" y="23" width="225" height="18" rx="2" fill="#0f3460"/>
+      <text x="377" y="35" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">Perfil – Local Freela</text>
+      <circle cx="377" cy="68" r="22" fill="#e0f2fe" stroke="#0f3460" stroke-width="1.5"/>
+      <text x="377" y="73" text-anchor="middle" font-size="16">👤</text>
+      <text x="377" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1a1a2e">Ana Paula Silva</text>
+      <text x="377" y="113" text-anchor="middle" font-size="9" fill="#f59e0b">★★★★★  5.0</text>
+      <rect x="347" y="118" width="60" height="14" rx="7" fill="#fdf4ff" stroke="#a855f7" stroke-width="1"/>
+      <text x="377" y="128" text-anchor="middle" font-size="7.5" fill="#7c3aed">🪙 24 tokens</text>
+      <rect x="310" y="136" width="134" height="12" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="0.8"/>
+      <text x="377" y="145" text-anchor="middle" font-size="7" fill="#92400e">🏆 #1 Top Prestador da Semana</text>
+      <rect x="265" y="152" width="76" height="14" rx="0" fill="#0f3460"/>
+      <text x="303" y="162" text-anchor="middle" font-size="7.5" fill="#fff">Habilidades</text>
+      <rect x="341" y="152" width="76" height="14" rx="0" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.5"/>
+      <text x="379" y="162" text-anchor="middle" font-size="7.5" fill="#475569">Histórico</text>
+      <rect x="417" y="152" width="73" height="14" rx="0" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.5"/>
+      <text x="453" y="162" text-anchor="middle" font-size="7.5" fill="#475569">Avaliações</text>
+      <rect x="265" y="168" width="225" height="20" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="272" y="181" font-size="7.5" fill="#1a1a2e">🎬  Edição de Vídeo Professional</text>
+      <text x="468" y="181" text-anchor="end" font-size="7" fill="#10b981">● Ativo</text>
+      <rect x="265" y="191" width="225" height="20" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="272" y="204" font-size="7.5" fill="#1a1a2e">📸  Fotografia para Redes Sociais</text>
+      <text x="468" y="204" text-anchor="end" font-size="7" fill="#10b981">● Ativo</text>
+      <rect x="265" y="214" width="225" height="20" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="272" y="227" font-size="7.5" fill="#1a1a2e">🎨  Design de Logotipo e Marca</text>
+      <text x="468" y="227" text-anchor="end" font-size="7" fill="#64748b">○ Inativo</text>
+      <rect x="265" y="238" width="225" height="16" rx="3" fill="#0f3460"/>
+      <text x="377" y="249" text-anchor="middle" font-size="7.5" fill="#fff">+ Anunciar Nova Habilidade</text>
+      <!-- WF3 -->
+      <rect x="515" y="5" width="235" height="255" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="632" y="19" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f3460">Tela 3 – Tokens e Ranking</text>
+      <rect x="520" y="23" width="225" height="18" rx="2" fill="#a855f7"/>
+      <text x="632" y="35" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">🪙 Meus Tokens – Local Freela</text>
+      <rect x="543" y="44" width="178" height="38" rx="6" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="632" y="60" text-anchor="middle" font-size="18" font-weight="800" fill="#7c3aed">🪙 24</text>
+      <text x="632" y="75" text-anchor="middle" font-size="7.5" fill="#9333ea">Saldo disponível</text>
+      <rect x="520" y="86" width="108" height="18" rx="3" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+      <text x="574" y="98" text-anchor="middle" font-size="7.5" fill="#166534">+ Como Ganhar Tokens</text>
+      <rect x="632" y="86" width="108" height="18" rx="3" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+      <text x="686" y="98" text-anchor="middle" font-size="7.5" fill="#991b1b">− Como Gastar Tokens</text>
+      <text x="524" y="116" font-size="8" font-weight="700" fill="#374151">Extrato Recente</text>
+      <rect x="520" y="120" width="225" height="16" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="526" y="131" font-size="7" fill="#166534">+5  Serviço concluído – Edição de Vídeo</text>
+      <text x="736" y="131" text-anchor="end" font-size="7" fill="#94a3b8">hoje</text>
+      <rect x="520" y="139" width="225" height="16" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="526" y="150" font-size="7" fill="#991b1b">-2  Solicitação enviada – Inglês</text>
+      <text x="736" y="150" text-anchor="end" font-size="7" fill="#94a3b8">ontem</text>
+      <rect x="520" y="158" width="225" height="16" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="526" y="169" font-size="7" fill="#166534">+2  Avaliação positiva recebida ★★★★★</text>
+      <text x="736" y="169" text-anchor="end" font-size="7" fill="#94a3b8">2d</text>
+      <rect x="520" y="177" width="225" height="16" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="526" y="188" font-size="7" fill="#991b1b">-5  Destaque de perfil ativado</text>
+      <text x="736" y="188" text-anchor="end" font-size="7" fill="#94a3b8">3d</text>
+      <text x="524" y="206" font-size="8" font-weight="700" fill="#374151">🏆 Ranking desta Semana</text>
+      <rect x="520" y="210" width="225" height="14" rx="2" fill="#fef9c3" stroke="#f59e0b" stroke-width="0.8"/>
+      <text x="526" y="220" font-size="7" fill="#78350f">#1 Ana P. · 48 tokens</text>
+      <rect x="520" y="227" width="225" height="14" rx="2" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.8"/>
+      <text x="526" y="237" font-size="7" fill="#374151">#2 João S. · 35 tokens</text>
+      <rect x="520" y="244" width="225" height="14" rx="2" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+      <text x="526" y="254" font-size="7" fill="#1e40af">#3 Você · 24 tokens ← sua posição</text>
+    </svg>
+    <div class="dcap">Figura 7 – Wireframes: Home/Busca · Perfil do Usuário · Tokens e Ranking</div>
+  </div>
+  <div class="callout warn" style="margin-top:10px;font-size:9pt;">
+    <strong>⚠ Nota:</strong> Os wireframes representam estrutura e hierarquia de informação. Cores, tipografia e espaçamento finais serão definidos na etapa de desenvolvimento.
+  </div>
+  <div class="pg-num">15</div>
+  <div class="pg-mark">Local Freela · Documento Técnico</div>
+</div>
+
+<div style="text-align:center;color:#999;font-size:8.5pt;padding:8mm;font-family:'Segoe UI',sans-serif;">
+  Para gerar o PDF: <strong>Ctrl+P</strong> (ou ⌘P no Mac) → Salvar como PDF → Desativar cabeçalhos e rodapés do navegador
+</div>
+</body>
+</html>
